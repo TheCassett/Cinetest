@@ -1,0 +1,8 @@
+body {
+    background-image: url('../images/fondo.jpg');
+    background-size: cover;              /* Asegura que cubra toda la pantalla */
+    background-position: center center;  /* Centra la imagen */
+    background-repeat: no-repeat;        /* No se repite */
+    background-attachment: fixed;        /* Permite que se mantenga fija al hacer scroll */
+    min-height: 100vh;                   /* Asegura que tome al menos el 100% de la altura de la ventana */
+}
