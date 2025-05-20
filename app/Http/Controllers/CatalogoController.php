@@ -29,22 +29,30 @@ class CatalogoController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'titulo' => 'required',
-            'genero' => 'required',
-            'director' => 'required',
+            'titulo' => 'required|string|max:255',
+            'descripcion' => 'required|string',
+            'genero' => 'required|string',
+            'director' => 'required|string',
             'fecha_estreno' => 'required|date',
+        ], [
+            'titulo.required' => 'El título es obligatorio.',
+            'descripcion.required' => 'La descripción es obligatoria.',
+            'genero.required' => 'El género es obligatorio.',
+            'director.required' => 'El director es obligatorio.',
+            'fecha_estreno.required' => 'La fecha de estreno es obligatoria.',
         ]);
 
-        Catalogo::create([
-            'titulo' => $request->titulo,
-            'descripcion' => $request->descripcion,
-            'genero' => $request->genero,
-            'director' => $request->director,
-            'fecha_estreno' => $request->fecha_estreno,
-            'user_id' => auth()->id(),
-        ]);
+        // Guarda la película
+        $pelicula = new Catalogo();
+        $pelicula->titulo = $request->titulo;
+        $pelicula->descripcion = $request->descripcion;
+        $pelicula->genero = $request->genero;
+        $pelicula->director = $request->director;
+        $pelicula->fecha_estreno = $request->fecha_estreno;
+        $pelicula->user_id = auth()->id();
+        $pelicula->save();
 
-        return redirect()->route('catalogo.index')->with('success', 'Película agregada');
+        return redirect()->route('catalogo.index')->with('success', 'Película agregada correctamente.');
     }
 
     // Formulario para editar

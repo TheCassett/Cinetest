@@ -1,3 +1,15 @@
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <strong>¡Ups! Hay errores en el formulario:</strong>
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+
 <div class="mb-3">
     <label for="titulo" class="form-label">Título</label>
     <input type="text" name="titulo" id="titulo" class="form-control"
